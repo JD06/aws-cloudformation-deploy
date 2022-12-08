@@ -1,0 +1,22 @@
+# This code deploy AWS Resources via CFN
+Parameters:
+  EnvironmentName:
+    Description: Environment name to be used for the cfn
+    Type: String
+    
+  VpcCIDR:
+    Description: IP Ranges for the vpc
+    Type: String
+    Default: 10.0.0.0/16
+
+
+Resources:
+  VPC:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Ref EnvironmentName
